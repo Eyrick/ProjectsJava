@@ -1,39 +1,40 @@
 package Pacotes;
 
-public class Produtos {
+
+public abstract class Produtos {
     String nome;
     int id_produto;
     String descricao;
-    float preco_base;
-    boolean estoque = true;
+    double preco_base;
+    int quant_estoque;
 
-    public Produtos(int id_produto, String nome, String descricao, float preco_base, boolean estoque) {
+    public Produtos(int id_produto, String nome, String descricao, double preco_base) {
         this.nome = nome;
         this.id_produto = id_produto;
         this.descricao =  descricao;
         this.preco_base = preco_base;
-        this.estoque= estoque;
+        System.out.println("Produto Criado");
     }
 
-    void Exibir_Detalhes(Produtos produto){
-        System.out.println("--------- Informações do Produto ---------");
-        System.out.println("Nome: " + produto.nome);
-        System.out.println("Id: " + produto.id_produto);
-        System.out.println("Descrição: " + produto.descricao);
-        System.out.println("Preço: R$" + produto.preco_base);
-        System.out.println("Estoque: " + Verificar_Disponibilidade(produto));
+    void exibirDetalhes(){
+        System.out.println("\n--------- Informações do Produto ---------");
+        System.out.println("Nome: " + nome);
+        System.out.println("Id: " + id_produto);
+        System.out.println("Descrição: " + descricao);
+        System.out.printf("Preço Normal: R$%.2f\n",preco_base);
     }
 
-    String Verificar_Disponibilidade(Produtos produto){
-        if(produto.estoque){
-            return "Disponível no Estoque";
+    public void verificarDisponibilidade(){
+        if(quant_estoque>0){
+            System.out.println("Disponível no Estoque");
         }else{
-            return "Indisponível no Estoque";
+            System.out.println("Indisponível no Estoque");
         }
 
     }
 
-    int calcular_preco_final(float preco_base){
-
+    public void calcularPrecoFinal(double desconto){
+        double valor_final = preco_base - (preco_base / 100 * desconto);
+        System.out.printf("O preco com desconto é R$%.2f\n",valor_final);
     }
 }
